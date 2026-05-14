@@ -1,0 +1,28 @@
+{
+  "name": "cse340-block3",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/priscillavarrenti/CSE340-block3#readme",
+  "bugs": {
+    "url": "https://github.com/priscillavarrenti/CSE340-block3/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/priscillavarrenti/CSE340-block3.git"
+  },
+  "license": "ISC",
+  "author": "Priscilla Varrenti",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ejs": "^5.0.2",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

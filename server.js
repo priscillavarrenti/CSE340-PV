@@ -2,9 +2,7 @@ import express from 'express';
 import { fileURLToPath } from 'url';
 import path from 'path';
 import { testConnection } from './src/models/db.js';
-import { getAllOrganizations } from './src/models/organizations.js';
-import { getAllCategories } from './src/models/categories.js';
-import { getAllProjects } from './src/models/projects.js';
+import router from './src/routes.js';
 
 // Define the application environment
 const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || 'production';
@@ -35,32 +33,35 @@ app.set('views', path.join(__dirname, 'src/views'));
  * Routes
  */
 
-// Home page
-app.get('/', async (req, res) => {
-    const title = 'Home';
-    res.render('home', { title });
+app.use(router);
+
+// Catch-all route for 404 errors
+app.use((req, res, next) => {
+    const err = new Error('Page Not Found');
+    err.status = 404;
+    next(err);
 });
 
-// Organizations page
-app.get('/organizations', async (req, res) => {
-    const organizations = await getAllOrganizations()
-    const title = 'Our Partner Organizations'
+// Global error handler
+app.use((err, req, res, next) => {
+    // Log error details for debugging
+    console.error('Error occurred:', err.message);
+    console.error('Stack trace:', err.stack);
     
-    res.render('organizations', { title, organizations });
-});
-
-// Projects page
-app.get('/projects', async (req, res) => {
-    const projects = await getAllProjects();
-    const title = 'Projects';
-    res.render('projects', { title, projects });
-});
-
-// Categories page
-app.get('/categories', async (req, res) => {
-    const categories = await getAllCategories()
-    const title = 'Service Categories';
-    res.render('categories', { title, categories });
+    // Determine status and template
+    const status = err.status || 500;
+    const template = status === 404 ? '404' : '500';
+    
+    // Prepare data for the template
+    const context = {
+        title: status === 404 ? 'Page Not Found' : 'Server Error',
+        error: err.message,
+        stack: err.stack,
+        NODE_ENV
+    };
+    
+    // Render the appropriate error template
+    res.status(status).render(`errors/${template}`, context);
 });
 
 // Start server

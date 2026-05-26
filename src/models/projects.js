@@ -5,11 +5,11 @@ const getAllProjects = async () => {
     const query = `
         SELECT
             project_id,
-            name,
+            title,
             description,
             organization_id
         FROM public.project
-        ORDER BY name;
+        ORDER BY date;
     `
 
     const result = await db.query(query)
@@ -17,18 +17,20 @@ const getAllProjects = async () => {
     return result.rows
 }
 
-export { getAllProjects, getProjectsByOrganizationId };
+
 
 const getProjectsByOrganizationId = async (organizationId) => {
     const query = `
         SELECT
             project_id,
             organization_id,
-            name,
-            description
+            title,
+            description,
+            location,
+            date
         FROM project
         WHERE organization_id = $1
-        ORDER BY name;
+        ORDER BY date;
     `;
 
     const queryParams = [organizationId];
@@ -37,3 +39,5 @@ const getProjectsByOrganizationId = async (organizationId) => {
 
     return result.rows;
 };
+
+export { getAllProjects, getProjectsByOrganizationId };

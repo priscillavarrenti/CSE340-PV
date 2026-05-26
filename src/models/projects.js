@@ -28,7 +28,7 @@ const getProjectsByOrganizationId = async (organizationId) => {
             description
         FROM project
         WHERE organization_id = $1
-        ORDER BY date;
+        ORDER BY name;
     `;
 
     const queryParams = [organizationId];

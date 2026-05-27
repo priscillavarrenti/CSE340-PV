@@ -86,7 +86,7 @@ VALUES
 -- ========================================
 INSERT INTO project (
     organization_id,
-    name,
+    title,
     description
 )
 VALUES

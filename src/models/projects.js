@@ -7,6 +7,8 @@ const getAllProjects = async () => {
             project_id,
             title,
             description,
+            location,
+            date,
             organization_id
         FROM public.project
         ORDER BY date;
@@ -16,7 +18,6 @@ const getAllProjects = async () => {
 
     return result.rows
 }
-
 
 
 const getProjectsByOrganizationId = async (organizationId) => {

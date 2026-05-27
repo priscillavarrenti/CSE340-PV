@@ -17,6 +17,8 @@ CREATE TABLE project (
     organization_id INT NOT NULL,
     title VARCHAR(150) NOT NULL,
     description TEXT NOT NULL,
+    location VARCHAR(255),
+    date DATE,
 
     CONSTRAINT fk_organization
         FOREIGN KEY (organization_id)

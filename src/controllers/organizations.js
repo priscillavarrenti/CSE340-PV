@@ -8,7 +8,7 @@ const showOrganizationsPage = async (req, res) => {
     res.render('organizations', { title, organizations });
 };
 
-export { showOrganizationsPage, showOrganizationDetailsPage };
+
 
 const showOrganizationDetailsPage = async (req, res) => {
 
@@ -27,4 +27,7 @@ const showOrganizationDetailsPage = async (req, res) => {
         organizationDetails,
         projects
     });
+    
 };
+
+export { showOrganizationsPage, showOrganizationDetailsPage };

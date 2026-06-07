@@ -47,6 +47,9 @@ const processNewOrganizationForm = async (req, res) => {
         logoFilename
     );
 
+    // Set a succes flash messege
+    req.flash('success', 'Organization created successfully!');
+
     res.redirect(`/organization/${organizationId}`);
 };
 

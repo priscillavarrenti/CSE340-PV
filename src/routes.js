@@ -17,7 +17,12 @@ import {
     projectValidation, 
     processNewProjectForm
 } from './controllers/projects.js';
-import { showCategoriesPage, showCategoryDetailsPage } from './controllers/categories.js';
+import { 
+    showCategoriesPage, 
+    showCategoryDetailsPage,
+    showAssignCategoriesForm,
+    processAssignCategoriesForm 
+} from './controllers/categories.js';
 import { testErrorPage } from './controllers/errors.js';
 
 
@@ -54,6 +59,10 @@ router.post('/new-project', projectValidation, processNewProjectForm);
 router.get('/categories', showCategoriesPage);
 
 router.get('/category/:id', showCategoryDetailsPage);
+
+router.get('/assign-categories/:projectId', showAssignCategoriesForm);
+
+router.post('/assign-categories/:projectId', processAssignCategoriesForm);
 
 // Error test route
 router.get('/test-error', testErrorPage);

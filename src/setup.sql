@@ -89,23 +89,31 @@ VALUES
 INSERT INTO project (
     organization_id,
     title,
-    description
+    description,
+    location,
+    date
 )
 VALUES
 (
     1,
     'Neighborhood Playground Renovation',
-    'Renovating playgrounds for local families.'
+    'Renovating playgrounds for local families.',
+    'Rexburg',
+    '2025-10-01'
 ),
 (
     2,
     'Urban Garden Expansion',
-    'Expanding community garden spaces.'
+    'Expanding community garden spaces.',
+    'Idaho Falls',
+    '2025-11-15'
 ),
 (
     3,
     'Volunteer Food Drive',
-    'Organizing food donations for shelters.'
+    'Organizing food donations for shelters.',
+    'Pocatello',
+    '2025-12-01'
 );
 
 -- ========================================

@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { createUser } from '../models/users.js';
+import { createUser, authenticateUser } from '../models/users.js';
 
 const showUserRegistrationForm = (req, res) => {
     res.render('register', {
@@ -46,7 +46,71 @@ const processUserRegistrationForm = async (req, res) => {
     }
 };
 
+const showLoginForm = (req, res) => {
+    res.render('login', {
+        title: 'Login'
+    });
+};
+
+const processLoginForm = async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        const user = await authenticateUser(
+            email,
+            password
+        );
+
+        if (user) {
+            req.session.user = user;
+
+            req.flash(
+                'success',
+                'Login successful!'
+            );
+
+            console.log(
+                'User logged in:',
+                user
+            );
+
+            return res.redirect('/');
+        }
+
+        req.flash(
+            'error',
+            'Invalid email or password.'
+        );
+
+        res.redirect('/login');
+
+    } catch (error) {
+        console.error(error);
+
+        req.flash(
+            'error',
+            'Login failed.'
+        );
+
+        res.redirect('/login');
+    }
+};
+
+const processLogout = (req, res) => {
+    delete req.session.user;
+
+    req.flash(
+        'success',
+        'Logout successful!'
+    );
+
+    res.redirect('/login');
+};
+
 export {
     showUserRegistrationForm,
-    processUserRegistrationForm
+    processUserRegistrationForm,
+    showLoginForm,
+    processLoginForm,
+    processLogout
 };

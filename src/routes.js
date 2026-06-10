@@ -36,7 +36,9 @@ import {
     processUserRegistrationForm,
     showLoginForm,
     processLoginForm,
-    processLogout
+    processLogout,
+    requireLogin,
+    showDashboard
 } from './controllers/users.js';
 
 
@@ -108,6 +110,11 @@ router.get('/login', showLoginForm);
 router.post('/login', processLoginForm);
 
 router.get('/logout', processLogout);
+
+router.get('/dashboard',
+    requireLogin,
+    showDashboard
+);
 
 // Error test route
 router.get('/test-error', testErrorPage);

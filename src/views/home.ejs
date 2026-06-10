@@ -9,4 +9,12 @@
         <img class="main-logo" src="/images/cse340-service-network.png" alt="CSE 340 Service Network Logo" fetchpriority="high">
     </main>
 
+    <% if (isLoggedIn) { %>
+        <p>
+            <a href="/dashboard">
+                My Dashboard
+            </a>
+        </p>
+    <% } %>
+
 <%- include('partials/footer') %>

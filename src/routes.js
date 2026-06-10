@@ -45,11 +45,11 @@ import {
 
 const router = express.Router();
 
-router.get('/', requireRole('admin'), showHomePage);
+router.get('/', showHomePage);
 
-router.get('/organizations', requireRole('admin'), showOrganizationsPage);
+router.get('/organizations', showOrganizationsPage);
 
-router.get('/organization/:id', requireRole('admin'), showOrganizationDetailsPage);
+router.get('/organization/:id', showOrganizationDetailsPage);
 
 router.get('/new-organization', requireRole('admin'), showNewOrganizationForm);
 
@@ -66,9 +66,9 @@ router.post(
     processEditOrganizationForm
 );
 
-router.get('/projects', requireRole('admin'), showProjectsPage);
+router.get('/projects', showProjectsPage);
 
-router.get('/project/:id', requireRole('admin'), showProjectDetailsPage);
+router.get('/project/:id', showProjectDetailsPage);
 
 router.get('/new-project', requireRole('admin'), showNewProjectForm);
 
@@ -78,9 +78,9 @@ router.get('/edit-project/:id', requireRole('admin'), showEditProjectForm);
 
 router.post('/edit-project/:id', requireRole('admin'), projectValidation, processEditProjectForm);
 
-router.get('/categories', requireRole('admin'), showCategoriesPage);
+router.get('/categories', showCategoriesPage);
 
-router.get('/category/:id', requireRole('admin'), showCategoryDetailsPage);
+router.get('/category/:id', showCategoryDetailsPage);
 
 router.get('/assign-categories/:projectId', requireRole('admin'), showAssignCategoriesForm);
 
@@ -98,31 +98,22 @@ router.post('/edit-category/:id',
     processEditCategoryForm
 );
 
-router.get(
-    '/register',
-    requireRole('admin'),
-    showUserRegistrationForm
-);
+router.get('/register', showUserRegistrationForm );
 
-router.post(
-    '/register',
-    requireRole('admin'),
-    processUserRegistrationForm
-);
+router.post('/register', processUserRegistrationForm);
 
-router.get('/login', requireRole('admin'), showLoginForm);
+router.get('/login', showLoginForm);
 
-router.post('/login', requireRole('admin'), processLoginForm);
+router.post('/login', processLoginForm);
 
-router.get('/logout', requireRole('admin'), processLogout);
+router.get('/logout', processLogout);
 
 router.get('/dashboard',
-    requireRole('admin'),
     requireLogin,
     showDashboard
 );
 
 // Error test route
-router.get('/test-error', requireRole('admin'), testErrorPage);
+router.get('/test-error', testErrorPage);
 
 export default router;

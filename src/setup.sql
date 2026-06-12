@@ -137,3 +137,23 @@ VALUES
 (2, 3),
 (2, 1),
 (3, 2);
+
+-- ========================================
+-- Volunteer Table
+-- ========================================
+CREATE TABLE volunteer (
+    user_id INT NOT NULL,
+    project_id INT NOT NULL,
+
+    PRIMARY KEY (user_id, project_id),
+
+    CONSTRAINT fk_volunteer_user
+        FOREIGN KEY (user_id)
+        REFERENCES users(user_id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_volunteer_project
+        FOREIGN KEY (project_id)
+        REFERENCES project(project_id)
+        ON DELETE CASCADE
+);

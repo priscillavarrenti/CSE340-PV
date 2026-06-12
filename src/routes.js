@@ -17,7 +17,9 @@ import {
     projectValidation, 
     processNewProjectForm,
     showEditProjectForm,
-    processEditProjectForm
+    processEditProjectForm,
+    volunteerForProject,
+    removeVolunteerFromProject
 } from './controllers/projects.js';
 import { 
     showCategoriesPage, 
@@ -118,6 +120,18 @@ router.get(
     '/users',
     requireRole('admin'),
     showUsersPage
+);
+
+router.get(
+    '/project/:id/volunteer',
+    requireLogin,
+    volunteerForProject
+);
+
+router.get(
+    '/project/:id/remove-volunteer',
+    requireLogin,
+    removeVolunteerFromProject
 );
 
 // Error test route
